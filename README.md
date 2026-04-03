@@ -28,9 +28,6 @@ Since I had some free time, I decided to go a bit beyond what was asked in the t
 
 3. A masonry (Pinterest-like) layout could be implemented. I experimented with it briefly, but didn’t like the result enough to include it.
 
-
-# 📸 Photo Gallery
-
 **Angular 21** photo gallery app featuring infinite scrolling, favorites management, dark/light theming, and a fully zoneless, signal-driven architecture.
 
 ![Angular](https://img.shields.io/badge/Angular-21.2.7-dd0031?logo=angular&logoColor=white)
