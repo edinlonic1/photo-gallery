@@ -35,7 +35,7 @@ describe('Favorites', () => {
     cy.get('a[aria-label="My favorites"]').find('.mat-badge-content').should('contain', '1');
     // Remove same photo
     cy.get('app-photo-card').first().find('.favorite-btn').click({ force: true });
-    // Badge count should reset — either badge disappears or shows nothing
+    // Badge count should reset - either badge disappears or shows nothing
     cy.get('a[aria-label="My favorites"]').then(($el) => {
       const badge = $el.find('.mat-badge-content');
       if (badge.length) {

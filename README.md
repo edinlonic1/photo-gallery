@@ -6,7 +6,7 @@ Since I had some free time, I decided to go a bit beyond what was asked in the t
 
 1. In the wireframe, Gallery and Favorites are positioned in the middle of the screen. Since I only received a wireframe and not actual Figma mockups, I took the liberty to position them in a way that I felt provides better UX and is more visually pleasing.
 
-2. Added a dark and light theme — it felt like a natural improvement.
+2. Added a dark and light theme - it felt like a natural improvement.
 
 3. Added the ability to download a photo from the details view, since a user might want to save an image they like.
 
@@ -59,13 +59,13 @@ Since I had some free time, I decided to go a bit beyond what was asked in the t
 
 ## Features
 
-- **Infinite Scroll Gallery** — Browse photos with automatic pagination using `IntersectionObserver` (pre-fetches 200px before you reach the bottom)
-- **Favorites Management** — Toggle favorites with a heart button, view saved photos on a dedicated page, and inspect full-size details
-- **LocalStorage Persistence** — Favorites and theme preference survive browser refreshes
-- **Dark / Light Mode** — Instant theme switching via CSS custom properties, no re-render needed
-- **Zoneless Architecture** — No `zone.js` in production; Angular Signals drive all change detection
-- **Responsive Design** — Fluid CSS grid adapts from mobile to desktop
-- **Material Design 3** — Angular Material with M3 violet/rose palette
+- **Infinite Scroll Gallery** - Browse photos with automatic pagination using `IntersectionObserver` (pre-fetches 200px before you reach the bottom)
+- **Favorites Management** - Toggle favorites with a heart button, view saved photos on a dedicated page, and inspect full-size details
+- **LocalStorage Persistence** - Favorites and theme preference survive browser refreshes
+- **Dark / Light Mode** - Instant theme switching via CSS custom properties, no re-render needed
+- **Zoneless Architecture** - No `zone.js` in production; Angular Signals drive all change detection
+- **Responsive Design** - Fluid CSS grid adapts from mobile to desktop
+- **Material Design 3** - Angular Material with M3 violet/rose palette
 
 ---
 
@@ -136,7 +136,7 @@ This runs `ng serve` under the hood. Once compiled, open your browser to:
 http://localhost:4200
 ```
 
-The app supports **hot module replacement** — changes to source files will automatically reload in the browser.
+The app supports **hot module replacement** - changes to source files will automatically reload in the browser.
 
 ### Additional dev commands
 
@@ -256,8 +256,8 @@ The app uses `provideZonelessChangeDetection()` instead of `zone.js`. All compon
 
 State is managed through two injectable signal stores:
 
-- **`PhotosStore`** — Manages the paginated gallery (`photos`, `loading`, `hasMore`, `isEmpty`). Exposes `loadMore()` for infinite scroll and `reset()` to clear state.
-- **`FavoritesStore`** — Manages favorite photos (`favorites`, `count`). Exposes `addFavorite()`, `removeFavorite()`, `toggleFavorite()`, `isFavorite()`, and `getById()`. Uses `effect()` to reactively persist to `localStorage` whenever favorites change.
+- **`PhotosStore`** - Manages the paginated gallery (`photos`, `loading`, `hasMore`, `isEmpty`). Exposes `loadMore()` for infinite scroll and `reset()` to clear state.
+- **`FavoritesStore`** - Manages favorite photos (`favorites`, `count`). Exposes `addFavorite()`, `removeFavorite()`, `toggleFavorite()`, `isFavorite()`, and `getById()`. Uses `effect()` to reactively persist to `localStorage` whenever favorites change.
 
 ### Infinite Scroll
 
@@ -286,7 +286,7 @@ All routes are **lazy-loaded** via dynamic `import()`:
 | `/`            | `GalleryComponent`     | Photo Gallery  | Infinite scroll gallery           |
 | `/favorites`   | `FavoritesPageComponent` | My Favorites | Grid of saved favorite photos     |
 | `/photos/:id`  | `PhotoDetailsComponent` | Photo Details | Full-size image with metadata     |
-| `**`           | —                      | —              | Redirects to `/`                  |
+| `**`           | -                      | -              | Redirects to `/`                  |
 
 Route parameters (`:id`) are automatically bound to component inputs via `withComponentInputBinding()`.
 
@@ -397,10 +397,10 @@ The project includes **47 Cypress e2e tests** across 6 spec files that cover all
 The dev server must be running before executing e2e tests:
 
 ```bash
-# Terminal 1 — start the app
+# Terminal 1 - start the app
 npm start
 
-# Terminal 2 — run e2e tests
+# Terminal 2 - run e2e tests
 npm run e2e
 ```
 
@@ -425,7 +425,7 @@ npm run e2e
 
 ### Test isolation
 
-Each test starts with a clean state — `localStorage` is cleared in `cypress/support/e2e.ts` before every test run to prevent cross-test contamination.
+Each test starts with a clean state - `localStorage` is cleared in `cypress/support/e2e.ts` before every test run to prevent cross-test contamination.
 
 ### Configuration
 
@@ -457,7 +457,7 @@ Every push to the `main` branch triggers a GitHub Actions workflow that:
 1. Push this repo to GitHub as `photo-gallery`
 2. Go to **Settings → Pages** in your repository
 3. Under **Build and deployment → Source**, select **GitHub Actions**
-4. Push to `main` — the workflow runs automatically
+4. Push to `main` - the workflow runs automatically
 
 Your app will be live at:
 
@@ -477,18 +477,18 @@ This builds the production bundle with `--base-href /photo-gallery/`. Output is 
 
 ### SPA routing on GitHub Pages
 
-GitHub Pages is a static file host and doesn't support server-side rewrites. When a user navigates to `/photo-gallery/photos/42` directly, GitHub returns a 404. The workflow solves this by copying `index.html` to `404.html` — GitHub serves this page for unknown routes, which bootstraps Angular and lets the client-side router handle the path.
+GitHub Pages is a static file host and doesn't support server-side rewrites. When a user navigates to `/photo-gallery/photos/42` directly, GitHub returns a 404. The workflow solves this by copying `index.html` to `404.html` - GitHub serves this page for unknown routes, which bootstraps Angular and lets the client-side router handle the path.
 
 ### Changing the repository name
 
 If your repository name is different from `photo-gallery`, update two places:
 
-1. **`package.json`** — change the `build:gh-pages` script base href:
+1. **`package.json`** - change the `build:gh-pages` script base href:
    ```json
    "build:gh-pages": "ng build --base-href /YOUR-REPO-NAME/"
    ```
 
-2. **`.github/workflows/deploy.yml`** — change the `--base-href` in the build step:
+2. **`.github/workflows/deploy.yml`** - change the `--base-href` in the build step:
    ```yaml
    - run: npx ng build --base-href /YOUR-REPO-NAME/
    ```
