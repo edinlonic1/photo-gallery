@@ -1,0 +1,69 @@
+<div class="details-container">
+  <div class="details-toolbar">
+    <button mat-button (click)="goBack()" aria-label="Go back">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+
+    @if (photo()) {
+      <div class="toolbar-actions">
+        <button
+          mat-icon-button
+          class="action-icon-btn"
+          (click)="downloadPhoto()"
+          [disabled]="downloading()"
+          [matTooltip]="downloading() ? 'Downloading...' : 'Download photo'"
+          aria-label="Download photo"
+        >
+          <mat-icon>{{ downloading() ? 'hourglass_empty' : 'download' }}</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          class="action-icon-btn"
+          (click)="toggleFavorite()"
+          [matTooltip]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+          [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+        >
+          <mat-icon [class.favorite-active]="isFavorite()">{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>
+      </div>
+    }
+  </div>
+
+  @if (photo()) {
+    <div class="photo-fullscreen">
+      <div class="image-container">
+        @if (!imageLoaded()) {
+          <div
+            class="image-skeleton"
+            [style.aspect-ratio]="photo()!.width + '/' + photo()!.height"
+          >
+            <mat-icon class="skeleton-icon">image</mat-icon>
+          </div>
+        }
+        <img
+          [src]="photo()!.url"
+          [alt]="'Photo by ' + photo()!.author"
+          class="full-image"
+          [class.loaded]="imageLoaded()"
+          (load)="onImageLoad()"
+        />
+      </div>
+      <div class="photo-info">
+        <p class="author">
+          <mat-icon>person</mat-icon>
+          {{ photo()!.author }}
+        </p>
+        <p class="dimensions">{{ photo()!.width }} × {{ photo()!.height }}</p>
+      </div>
+    </div>
+  } @else {
+    <div class="not-found">
+      <mat-icon>image_not_supported</mat-icon>
+      <h2>Photo not found</h2>
+      <p>This photo may have been removed from your favorites.</p>
+      <button mat-flat-button color="primary" (click)="goBack()">Go Back</button>
+    </div>
+  }
+</div>

@@ -1,0 +1,37 @@
+.page-header {
+  margin-bottom: 24px;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--app-text-primary);
+  }
+
+  .subtitle {
+    color: var(--app-text-secondary);
+    margin: 0;
+  }
+}
+
+/* Responsive grid: auto-fill creates as many 280px+ columns as fit.
+   minmax(280px, 1fr) ensures cards never shrink below 280px. */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Sentinel element must have some height for IntersectionObserver to detect it */
+.sentinel {
+  height: 1px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  color: var(--app-text-secondary);
+}

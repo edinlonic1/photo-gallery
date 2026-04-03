@@ -1,0 +1,56 @@
+<mat-toolbar class="app-header">
+  <a routerLink="/" class="brand-link" aria-label="Photo Gallery Home">
+    <mat-icon class="brand-icon">photo_library</mat-icon>
+    <span class="brand-name">Photo Gallery</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <nav class="nav-links" aria-label="Main navigation">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      aria-label="Photos gallery"
+    >
+      <mat-icon>grid_view</mat-icon>
+      <span class="nav-label">Gallery</span>
+    </a>
+    <a
+      mat-button
+      routerLink="/favorites"
+      routerLinkActive="active-link"
+      aria-label="My favorites"
+    >
+      <mat-icon
+        [matBadge]="favoritesCount() > 0 ? favoritesCount() : null"
+        matBadgeColor="accent"
+        matBadgeSize="small"
+      >favorite</mat-icon>
+      <span class="nav-label">Favorites</span>
+    </a>
+  </nav>
+
+  <button
+    mat-icon-button
+    [matTooltip]="isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+    [attr.aria-label]="isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+    (click)="toggleTheme()"
+    class="theme-toggle"
+  >
+    <mat-icon>{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Scroll-to-top button: appears in bottom-right when user scrolls down -->
+@if (isScrolled()) {
+  <button
+    class="scroll-to-top"
+    (click)="scrollToTop()"
+    matTooltip="Scroll to top"
+    aria-label="Scroll to top"
+  >
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+}

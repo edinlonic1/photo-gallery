@@ -1,0 +1,26 @@
+<mat-card class="photo-card" [class.is-favorite]="isFavorite()" (click)="onCardClick()">
+  <div class="photo-wrapper">
+    <img
+      [src]="photo().thumbnailUrl"
+      [alt]="'Photo by ' + photo().author"
+      loading="lazy"
+      class="photo-img"
+    />
+    <!-- Gradient overlay with favorite button, visible on hover -->
+    <div class="photo-overlay">
+      <button
+        mat-icon-button
+        class="favorite-btn"
+        [class.active]="isFavorite()"
+        [matTooltip]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+        [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+        (click)="onFavoriteToggle($event)"
+      >
+        <mat-icon>{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-card-content class="photo-meta">
+    <span class="photo-author">{{ photo().author }}</span>
+  </mat-card-content>
+</mat-card>

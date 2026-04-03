@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+/**
+ * Angular Material M3 (Material Design 3) theming.
+ *
+ * mat.theme() applies M3 design tokens globally. Unlike M2's define-palette/define-theme,
+ * M3 uses a simpler palette reference system. The palette choice here generates
+ * all the CSS custom properties (--mat-sys-*, --mdc-*) that Material components use.
+ *
+ * We define our own --app-* CSS variables below for custom UI elements.
+ * This two-layer system means:
+ *   - Material components use --mat-sys-* tokens (auto-generated)
+ *   - Our custom components use --app-* tokens (defined here)
+ *   - Theme switching overrides both layers via the .dark-theme class
+ */
+
+/* Light theme (default) */
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$violet-palette,
+      tertiary: mat.$rose-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+/* Dark theme -- applied when body has .dark-theme class */
+.dark-theme {
+  @include mat.theme((
+    color: (
+      theme-type: dark,
+      primary: mat.$violet-palette,
+      tertiary: mat.$rose-palette,
+    ),
+  ));
+}
+
+/**
+ * Custom CSS variables for app-specific theming.
+ *
+ * All custom components reference these --app-* variables instead of
+ * hardcoded colors. When .dark-theme is toggled on body, the variable
+ * values swap instantly -- no Angular change detection needed.
+ *
+ * This approach is far more performant than class-based conditional styles
+ * because the browser handles the cascade natively.
+ */
+:root {
+  /* Surface & background */
+  --app-bg: #fafafa;
+  --app-surface: #ffffff;
+
+  /* Text */
+  --app-text-primary: #1c1b1f;
+  --app-text-secondary: #49454f;
+
+  /* Header */
+  --app-header-bg: #6750a4;
+  --app-header-text: #ffffff;
+  --app-header-text-muted: rgba(255, 255, 255, 0.85);
+  --app-header-active-bg: rgba(255, 255, 255, 0.15);
+
+  /* Accent colors */
+  --app-favorite-color: #e53935;
+
+  /* Card & shape */
+  --app-card-radius: 12px;
+
+  /* Shadows */
+  --app-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --app-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --app-shadow-header: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  /* Overlays */
+  --app-overlay-gradient: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5));
+
+  /* Transitions */
+  --app-transition-fast: 0.2s ease;
+  --app-transition-normal: 0.3s ease;
+}
+
+/* Dark theme overrides -- swaps variable values for all components at once */
+body.dark-theme {
+  --app-bg: #121212;
+  --app-surface: #1e1e2e;
+  --app-text-primary: #e6e1e5;
+  --app-text-secondary: #cac4d0;
+  --app-header-bg: #4a3d8f;
+  --app-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --app-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --app-shadow-header: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --app-overlay-gradient: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7));
+}
+
+/* Global reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--app-text-primary);
+  transition: background-color var(--app-transition-normal), color var(--app-transition-normal);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}

@@ -1,0 +1,127 @@
+/* Header uses --app-header-* CSS variables for theme-aware styling.
+   When .dark-theme is toggled on body, these variables automatically update. */
+
+/* :host must be sticky (not just .app-header) because Angular wraps
+   the template in an <app-header> custom element. If only the inner
+   mat-toolbar were sticky, it would stick relative to the custom element
+   rather than the viewport. Making the host itself sticky ensures it
+   stays pinned at the top of the scroll container. */
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header {
+  gap: 8px;
+  background: var(--app-header-bg);
+  color: var(--app-header-text);
+  box-shadow: var(--app-shadow-header);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--app-header-text-muted);
+    border-radius: 8px;
+
+    &.active-link {
+      background: var(--app-header-active-bg);
+      color: var(--app-header-text);
+    }
+  }
+}
+
+/* Hide text labels on small screens and make nav buttons icon-sized */
+.nav-label {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links a.mat-mdc-button {
+    min-width: 40px !important;
+    padding: 0 8px !important;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .nav-links a.mat-mdc-button .mat-icon {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+.theme-toggle {
+  margin-left: 8px;
+  color: var(--app-header-text-muted);
+}
+
+/* Scroll-to-top — subtle circle, fixed bottom-right */
+.scroll-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--app-text-secondary, rgba(0, 0, 0, 0.2));
+  background: var(--app-surface, #fff);
+  color: var(--app-text-secondary, #666);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition:
+    opacity var(--app-transition-fast) ease,
+    background var(--app-transition-fast) ease;
+
+  &:hover {
+    opacity: 1;
+    background: var(--app-bg, #f5f5f5);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    right: 12px;
+    bottom: 16px;
+  }
+}

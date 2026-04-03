@@ -1,0 +1,125 @@
+.details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.details-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.favorite-active {
+  color: var(--app-favorite-color, #e53935);
+}
+
+.photo-fullscreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.image-skeleton {
+  width: 100%;
+  max-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--app-card-radius);
+  background: linear-gradient(110deg, #e0e0e0 30%, #f0f0f0 50%, #e0e0e0 70%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+:host-context(.dark-theme) .image-skeleton {
+  background: linear-gradient(110deg, #1a1a2e 30%, #25253e 50%, #1a1a2e 70%);
+  background-size: 200% 100%;
+}
+
+.skeleton-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  opacity: 0.3;
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.full-image {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: var(--app-card-radius);
+  box-shadow: var(--app-shadow-hover);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+
+  &.loaded {
+    opacity: 1;
+    position: relative;
+  }
+}
+
+.photo-info {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  color: var(--app-text-secondary);
+
+  p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 16px;
+
+  mat-icon {
+    font-size: 72px;
+    width: 72px;
+    height: 72px;
+    opacity: 0.4;
+    color: var(--app-text-secondary);
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--app-text-primary);
+  }
+
+  p {
+    margin: 0;
+    color: var(--app-text-secondary);
+  }
+}

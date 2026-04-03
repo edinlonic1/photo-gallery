@@ -1,0 +1,52 @@
+.page-header {
+  margin-bottom: 24px;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--app-text-primary);
+  }
+
+  .subtitle {
+    color: var(--app-text-secondary);
+    margin: 0;
+  }
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 16px;
+
+  .empty-icon {
+    font-size: 72px;
+    width: 72px;
+    height: 72px;
+    color: var(--app-text-secondary);
+    opacity: 0.5;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--app-text-primary);
+  }
+
+  p {
+    margin: 0;
+    color: var(--app-text-secondary);
+    max-width: 320px;
+  }
+}
