@@ -51,6 +51,7 @@ Since I had some free time, I decided to go a bit beyond what was asked in the t
 - [Building for Production](#building-for-production)
 - [Running Tests](#running-tests)
 - [End-to-End Tests (Cypress)](#end-to-end-tests-cypress)
+- [Deployment (GitHub Pages)](#deployment-github-pages)
 - [Architecture](#architecture)
 - [Routes](#routes)
 - [Theming](#theming)
@@ -440,6 +441,62 @@ The Cypress config is in `cypress.config.ts`:
 
 ---
 
+## Deployment (GitHub Pages)
+
+The app is configured for automatic deployment to GitHub Pages via GitHub Actions.
+
+### Automatic deployment (CI/CD)
+
+Every push to the `main` branch triggers a GitHub Actions workflow that:
+
+1. Installs dependencies (`npm ci`)
+2. Builds the app with the correct base href (`/photo-gallery/`)
+3. Copies `index.html` to `404.html` for SPA client-side routing
+4. Deploys to GitHub Pages
+
+**Setup steps:**
+
+1. Push this repo to GitHub as `photo-gallery`
+2. Go to **Settings → Pages** in your repository
+3. Under **Build and deployment → Source**, select **GitHub Actions**
+4. Push to `main` — the workflow runs automatically
+
+Your app will be live at:
+
+```
+https://<your-username>.github.io/photo-gallery/
+```
+
+### Manual deployment (local build)
+
+To build locally and inspect the output before pushing:
+
+```bash
+npm run build:gh-pages
+```
+
+This builds the production bundle with `--base-href /photo-gallery/`. Output is in `dist/gallery-template/browser/`.
+
+### SPA routing on GitHub Pages
+
+GitHub Pages is a static file host and doesn't support server-side rewrites. When a user navigates to `/photo-gallery/photos/42` directly, GitHub returns a 404. The workflow solves this by copying `index.html` to `404.html` — GitHub serves this page for unknown routes, which bootstraps Angular and lets the client-side router handle the path.
+
+### Changing the repository name
+
+If your repository name is different from `photo-gallery`, update two places:
+
+1. **`package.json`** — change the `build:gh-pages` script base href:
+   ```json
+   "build:gh-pages": "ng build --base-href /YOUR-REPO-NAME/"
+   ```
+
+2. **`.github/workflows/deploy.yml`** — change the `--base-href` in the build step:
+   ```yaml
+   - run: npx ng build --base-href /YOUR-REPO-NAME/
+   ```
+
+---
+
 ## Scripts Reference
 
 | npm Script     | Command                                                    | Purpose                    |
@@ -450,6 +507,7 @@ The Cypress config is in `cypress.config.ts`:
 | `npm test`     | `ng test --no-watch --no-progress --browsers=ChromeHeadless` | Run unit tests (single run) |
 | `npm run e2e`  | `cypress run`                                              | Run e2e tests headless     |
 | `npm run e2e:open` | `cypress open`                                         | Open Cypress interactive UI |
+| `npm run build:gh-pages` | `ng build --base-href /photo-gallery/`           | Build for GitHub Pages     |
 
 ---
 

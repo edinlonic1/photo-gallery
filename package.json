@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
+    "build:gh-pages": "ng build --base-href /photo-gallery/",
     "e2e": "cypress run",
     "e2e:open": "cypress open"
   },
