@@ -375,6 +375,7 @@ The project includes **30 unit tests** across 7 spec files:
 | `gallery.component.spec.ts`         |   3   | Component creation, card rendering, favorite toggle         |
 | `favorites-page.component.spec.ts`|   4   | Component creation, card rendering, removal, navigation     |
 
+
 ### Quick test commands reference
 
 ```bash
